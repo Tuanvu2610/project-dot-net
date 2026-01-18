@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebApplication1.Models.Product>
+
+@{
+    ViewData["Title"] = "Họa Cụ Online";  // Tiêu đề trang
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/menunho.css" />
+}
+
+<div class="container-chinh">
+    <div class="khu-vuc-noi-dung">
+        <aside class="cot-trai">
+            <div class="menu-list">
+                <div class="menu-header">Sách các loại và Truyện tranh</div>
+                <ul>
+                    <li><a href="#">Tiểu thuyết và thơ</a></li>
+                    <li><a href="#">Sách Kinh Tế</a></li>
+                    <li><a href="#">Sách Kỹ Năng Sống</a></li>
+                    <li><a href="#">Sách Ngoại Ngữ</a></li>
+                    <li><a href="#">Sách Thiếu Nhi</a></li>
+                    <li><a href="#">Sách Nuôi Dạy Con</a></li>
+                    <li><a href="#">Sách Cho Teen</a></li>
+                    <li><a href="#">Bách Khoa Toàn Thư</a></li>
+                    <li><a href="#">Chính Trị - Triết Học</a></li>
+                    <li><a href="#">Truyện Tranh Manga</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="cot-phai">
+            <div class="thanh-loc">
+                <select class="select-box">
+                    <option>Sắp xếp: Mới nhất</option>
+                    <option>Giá: Thấp đến Cao</option>
+                    <option>Giá: Cao đến Thấp</option>
+                </select>
+            </div>
+
+            <div class="luoi-san-pham">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="the-san-pham">
+                            <img src="@item.ImageUrl" alt="@item.Name" class="anh-sp" />
+                            <div class="thong-tin-sp">
+                                <div class="hang-sx">@item.Brand</div>
+                                <a href="#" class="ten-sp" title="@item.Name">@item.Name</a>
+                                <div class="gia-tien">
+                                    @if (item.Price > 0)
+                                    {
+                                        @(item.Price.ToString("#,##0") + " đ")
+                                    }
+                                    else
+                                    {
+                                        <span>Liên hệ</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Không có sản phẩm nào để hiển thị.</p>
+                }
+            </div>
+        </main>
+    </div>
+</div>

@@ -1,8 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="cover-header">
+       <div class="header-left-home">
+          <ul>
+                @if (ViewBag.Categories != null)
+                {
+                    foreach (var item in ViewBag.Categories)
+                    {
+                        <li>
+                            <a asp-controller="Product" asp-action="@item.link">@item.name_cate</a>
+                            <span class="arrow">›</span>
+                            <div class="sub-menu">
+                                <ul class="hover">
+                                    @if (ViewBag.Categories != null)
+                                    {
+                                        foreach (var c in ViewBag.Categories)
+                                        {
+                                            if (object.Equals(c?.parent_id, item?.category_id))
+                                            {
+                                                <li>
+                                                    <a asp-controller="Product" asp-action="@c.link">@c.name_cate</a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>Không có danh mục nào để hiển thị.</li>
+                }
+            </ul>
+       </div>
+       <div class="header-right-home">
+            <img src="https://noithatqg.com/wp-content/uploads/2021/01/thiet-ke-cua-hang-sach-dep.gif" alt="" />
+       </div>
+    </div>
 </div>
