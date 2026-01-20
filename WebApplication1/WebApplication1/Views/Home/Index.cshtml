@@ -3,31 +3,37 @@
 }
 <div class="container">
     <div class="cover-header">
-       <div class="header-left-home">
-          <ul>
+        <div class="header-left-home">
+            <ul class="cover-menu">
                 @if (ViewBag.Categories != null)
                 {
-                    foreach (var item in ViewBag.Categories)
+                    var lookup = ViewBag.Categories as ILookup<int, Category>;
+                    var rootCategories = lookup[0].ToList();
+                    foreach (var item in rootCategories)
                     {
-                        <li>
+                        <li class="cover-cate">
                             <a asp-controller="Product" asp-action="@item.link">@item.name_cate</a>
                             <span class="arrow">›</span>
-                            <div class="sub-menu">
-                                <ul class="hover">
-                                    @if (ViewBag.Categories != null)
-                                    {
-                                        foreach (var c in ViewBag.Categories)
+                            @{
+                                var subCategories = lookup[item.category_id].ToList();
+                            }
+                            @if (subCategories.Any())
+                            {
+                                <div class="submenu">
+                                    <div class="submenu-header">
+                                        <h3>Danh mục nổi bật</h3>
+                                        <a asp-controller="Product" asp-action="@item.link">Xem tất cả ></a>
+                                    </div>
+                                    <ul class="hover">
+                                        @foreach (var child in subCategories)
                                         {
-                                            if (object.Equals(c?.parent_id, item?.category_id))
-                                            {
-                                                <li>
-                                                    <a asp-controller="Product" asp-action="@c.link">@c.name_cate</a>
-                                                </li>
-                                            }
+                                            <li>
+                                                <a asp-controller="Product" asp-action="@child.link">@child.name_cate</a>
+                                            </li>
                                         }
-                                    }
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
+                            }
                         </li>
                     }
                 }
@@ -35,10 +41,11 @@
                 {
                     <li>Không có danh mục nào để hiển thị.</li>
                 }
+
             </ul>
-       </div>
-       <div class="header-right-home">
+        </div>
+        <div class="header-right-home">
             <img src="https://noithatqg.com/wp-content/uploads/2021/01/thiet-ke-cua-hang-sach-dep.gif" alt="" />
-       </div>
+        </div>
     </div>
 </div>

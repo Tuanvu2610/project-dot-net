@@ -25,23 +25,21 @@ namespace WebApplication1.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public async Task<IActionResult> Index()
-        {
-            if (_context == null)
+            public async Task<IActionResult> Index()
             {
-                return Content("Lỗi: AppDbContext chưa được inject!");
-            }
-            var sach = await _context.Sach
-                .OrderByDescending(p => p.Ma_sach)
-                .ToListAsync();
-            var categories = await _context.category
-                .Where(c => c.parent_id == null)
-                .ToListAsync();
+                if (_context == null)
+                {
+                    return Content("Lỗi: AppDbContext chưa được inject!");
+                }
+                var sach = await _context.Sach
+                    .OrderByDescending(p => p.Ma_sach)
+                    .ToListAsync();
+                var categories = await _context.category.ToListAsync();
+                var menu = categories.ToLookup(c => c.parent_id ?? 0);
+                ViewBag.Sachs = sach;
+                ViewBag.Categories = menu;
 
-            // Gán vào ViewBag
-            ViewBag.Sachs = sach;
-            ViewBag.Categories = categories;
-            return View(categories);
-        }
+                return View();
+            }
     }
 }

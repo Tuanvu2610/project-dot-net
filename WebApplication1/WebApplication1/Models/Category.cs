@@ -14,7 +14,7 @@ namespace WebApplication1.Models
         public string name_cate { get; set; } = null!;
 
         [StringLength(20)]          
-        public string? parent_id { get; set; }   
+        public int? parent_id { get; set; }   
 
         [StringLength(20)]            
         public string? link { get; set; }  
