@@ -48,4 +48,79 @@
             <img src="https://noithatqg.com/wp-content/uploads/2021/01/thiet-ke-cua-hang-sach-dep.gif" alt="" />
         </div>
     </div>
+    <div class="body-page">
+        <div class="product-sale">
+            <h2 class="title-style"> Sản phẩm giảm giá sốc 🔥</h2>
+            <div class="slider-product">
+             <button class="slide-btn prev" onclick="slideLeft()">❮</button>
+             <button class="slide-btn next" onclick="slideRight()">❯</button>
+             <div class="product-list" id="productSlider">
+                @if (ViewBag.Sachs != null)    
+                    foreach(var p in ViewBag.Sachs)
+                    {
+                        <div class="product-card">
+                            @if(p.Percent > 0)
+                            {
+                                <span class="sale-pecent">-@p.Percent%</span>
+                            }
+                            <img src="@p.img" alt="" class="product-img">
+                            <h3 class="product-name padding style-name">@p.Ten_Sach</h3>
+                            <div class="product-price">
+                                <span class="price-origin ">
+                                    @String.Format("{0:N0}", p.Don_gia ?? 0)₫
+                                </span>
+                                <span class="price-sale">
+                                    @String.Format("{0:N0}", p.Gia_Ban ?? 0)₫
+                                </span>
+                            </div>                          
+                        </div>
+                    }
+            </div>
+            </div>
+        </div>
+        <div class="product-sale">
+            <h2 class="title-style">Sách Truyện Tranh</h2>
+                <div class="product-list">
+                    @if (ViewBag.Sachs != null)
+                        foreach (var p in ViewBag.Sachs)
+                        {
+                            <div class="product-card">
+                                @if (p.Percent > 0)
+                                {
+                                    <span class="sale-pecent">-@p.Percent%</span>
+                                }
+                                <img src="@p.img" alt="" class="product-img">
+                                <h3 class="product-name padding style-name">@p.Ten_Sach</h3>
+                                <div class="product-price">
+                                    <span class="price-origin ">
+                                        @String.Format("{0:N0}", p.Don_gia ?? 0)₫
+                                    </span>
+                                    <span class="price-sale">
+                                        @String.Format("{0:N0}", p.Gia_Ban ?? 0)₫
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const slider = document.getElementById('productSlider');
+        const cardWidth = 270;
+
+        function slideLeft() {
+            slider.scrollBy({
+                left: -cardWidth * 3,
+                behavior: 'smooth'
+            });
+        }
+
+        function slideRight() {
+            slider.scrollBy({
+                left: cardWidth * 3,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </div>
