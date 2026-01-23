@@ -1,0 +1,213 @@
+﻿@using project.Models
+@model AccountModel.LoginModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<link rel="stylesheet" href="~/css/login.css" />
+
+<div class="modal-container active">
+    <div id="login" class="modal @(ViewBag.ActiveModal == "login" ? "active" : "")">
+        <div class="modal-content">
+            <a asp-controller="Home" asp-action="Index" class="close-btn">&times;</a>
+
+            <h1 class="head">Đăng nhập</h1>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="error-message">@ViewBag.Error</div>
+            }
+            @if (ViewBag.Success != null)
+            {
+                <div class="success-message">@ViewBag.Success</div>
+            }
+            @if (ViewBag.SuccessReset != null)
+            {
+                <div class="success-message">@ViewBag.SuccessReset</div>
+            }
+
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <div class="section active">
+
+                    <div class="username-section style-section">
+                        <img src="https://www.svgrepo.com/show/105517/user-icon.svg">
+                        <input class="input-style"
+                               type="text"
+                               name="Username"
+                               placeholder="Tên đăng nhập hoặc Email"
+                               value="@Model?.Username">
+                    </div>
+
+                    <div class="password-section style-section">
+                        <img src="https://www.svgrepo.com/show/535485/lock-closed.svg">
+                        <input class="input-style"
+                               id="loginPassword"
+                               name="Password"
+                               type="password"
+                               placeholder="Mật khẩu">
+                        <span class="toggle-password"
+                              onclick="togglePassword('loginPassword', this)">🐵</span>
+                    </div>
+
+                    <div class="remember-section">
+                        <label class="remember-me">
+                            <input type="checkbox" name="Remember"> Ghi nhớ mật khẩu
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn">Đăng nhập</button>
+
+                    <p class="forgot-pass">
+                        <a href="javascript:void(0)" onclick="showForgotPass()">Quên mật khẩu?</a>
+                    </p>
+                </div>
+            </form>
+
+            <div class="select">
+                <p>Hoặc đăng nhập bằng</p>
+                <div class="link">
+                    <img src="https://www.svgrepo.com/show/354981/facebook-option.svg">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+                </div>
+            </div>
+
+            <div class="foot">
+                <a href="javascript:void(0)" onclick="showSignup()">Đăng ký tài khoản mới</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="signup" class="modal @(ViewBag.ActiveModal == "register" ? "active" : "")">
+        <div class="modal-content">
+            <a href="javascript:void(0)" class="close-btn" onclick="showLogin()">&times;</a>
+            <h1 class="head">Đăng ký</h1>
+
+            @if (ViewBag.ErrorRegister != null)
+            {
+                <div class="error-message">@ViewBag.ErrorRegister</div>
+            }
+
+            <form asp-controller="Account" asp-action="Register" method="post">
+
+                <div class="style-section">
+                    <img src="https://www.svgrepo.com/show/105517/user-icon.svg">
+                    <input class="input-style" name="Name" placeholder="Tên đầy đủ">
+                </div>
+
+                <div class="style-section">
+                    <img src="https://www.svgrepo.com/show/105517/user-icon.svg">
+                    <input class="input-style" name="Username" placeholder="Tên tài khoản">
+                </div>
+
+                <div class="style-section">
+                    <img src="https://www.svgrepo.com/show/498958/email.svg">
+                    <input class="input-style" name="Email" type="email" placeholder="Email">
+                </div>
+
+                <div class="style-section">
+                    <img src="https://www.svgrepo.com/show/535485/lock-closed.svg">
+                    <input class="input-style" name="Password" type="password" placeholder="Mật khẩu">
+                </div>
+
+                <div class="style-section">
+                    <img src="https://www.svgrepo.com/show/535485/lock-closed.svg">
+                    <input class="input-style" name="ConfirmPassword" type="password" placeholder="Xác nhận mật khẩu">
+                </div>
+
+                <button class="btn">Đăng ký</button>
+            </form>
+
+            <div class="foot">
+                <a href="javascript:void(0)" onclick="showLogin()">Quay lại Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="forgot" class="modal @(ViewBag.ActiveModal == "forgot" ? "active" : "")">
+        <div class="modal-content">
+            <a href="javascript:void(0)" class="close-btn" onclick="showLogin()">&times;</a>
+            @if (ViewBag.Step == null)
+            {
+                <h1 class="head">Quên mật khẩu</h1>
+
+                @if (ViewBag.ErrorForgot != null)
+                {
+                    <div class="error-message">@ViewBag.ErrorForgot</div>
+                }
+                @if (ViewBag.ErrorOtp != null)
+                {
+                    <div class="error-message">@ViewBag.ErrorOtp</div>
+                }
+                @if (ViewBag.ErrorReset != null)
+                {
+                    <div class="error-message">@ViewBag.ErrorReset</div>
+                }
+
+                <form asp-controller="Account" asp-action="Forgot" method="post">
+                    <div class="style-section">
+                        <img src="https://www.svgrepo.com/show/105517/user-icon.svg">
+                        <input class="input-style" type="email" name="Email" placeholder="Email khôi phục">
+                    </div>
+
+                    <button class="btn">Gửi yêu cầu</button>
+                </form>
+                <div class="foot"><a href="javascript:void(0)" onclick="showLogin()">Quay lại Đăng nhập</a></div>
+            }
+
+            @if (ViewBag.Step == "otp")
+            {
+                <h1 class="head">Nhập mã OTP</h1>
+
+                @if (ViewBag.Otp != null)
+                {
+                    <p style="color:red">OTP: @ViewBag.Otp</p>
+                }
+
+                <form asp-controller="Account" asp-action="Verify" method="post">
+                    <input type="hidden" name="Email" value="@ViewBag.Email" />
+
+                    <div class="style-section">
+                        <img src="https://www.svgrepo.com/show/535485/lock-closed.svg">
+                        <input class="input-style"
+                               name="Otp"
+                               placeholder="Nhập mã OTP"
+                               required>
+                    </div>
+
+                    <button class="btn">Xác nhận OTP</button>
+                </form>
+            }
+
+            @if (ViewBag.Step == "reset")
+            {
+                <h1 class="head">Tạo mật khẩu mới</h1>
+
+                <form asp-controller="Account" asp-action="Reset" method="post">
+                    <input type="hidden" name="Email" value="@ViewBag.Email" />
+
+                    <div class="style-section">
+                        <img src="https://www.svgrepo.com/show/535485/lock-closed.svg">
+                        <input class="input-style"
+                               type="password"
+                               name="NewPassword"
+                               placeholder="Mật khẩu mới"
+                               required>
+                    </div>
+
+                    <div class="style-section">
+                        <img src="https://www.svgrepo.com/show/535485/lock-closed.svg">
+                        <input class="input-style"
+                               type="password"
+                               name="ConfirmPassword"
+                               placeholder="Xác nhận mật khẩu"
+                               required>
+                    </div>
+
+                    <button class="btn">Đổi mật khẩu</button>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="~/js/site.js"></script>

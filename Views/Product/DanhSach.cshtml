@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication1.Models.Product>
+
+@{
+    ViewData["Title"] = "Dụng Cụ Vẽ";  // Tiêu đề trang
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/menunho.css" />
+}
+
+<div class="container-chinh">
+    <div class="khu-vuc-noi-dung">
+        <aside class="cot-trai">
+            <div class="menu-list">
+                <div class="menu-header">Dụng Cụ Vẽ</div>
+                <ul>
+                    <li><a href="#">Bút Vẽ & Cọ Vẽ</a></li>
+                    <li><a href="#">Màu Vẽ & Mực Vẽ</a></li>
+                    <li><a href="#">Sách Dạy Vẽ</a></li>
+                    <li><a href="#">Bộ Dụng Cụ Vẽ</a></li>
+                    <li><a href="#">Giấy Vẽ Canson & Sổ Ký Họa</a></li>
+                    <li><a href="#">Dụng Cụ Mỹ Thuật Khác</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="cot-phai">
+            <div class="thanh-loc">
+                <select class="select-box">
+                    <option>Sắp xếp: Mới nhất</option>
+                    <option>Giá: Thấp đến Cao</option>
+                    <option>Giá: Cao đến Thấp</option>
+                </select>
+            </div>
+
+            <div class="luoi-san-pham">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="the-san-pham">
+                            <img src="@item.ImageUrl" alt="@item.Name" class="anh-sp" />
+                            <div class="thong-tin-sp">
+                                <div class="hang-sx">@item.Brand</div>
+                                <a href="#" class="ten-sp" title="@item.Name">@item.Name</a>
+                                <div class="gia-tien">
+                                    @if (item.Price > 0)
+                                    {
+                                        @(item.Price.ToString("#,##0") + " đ")
+                                    }
+                                    else
+                                    {
+                                        <span>Liên hệ</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Không có sản phẩm nào để hiển thị.</p>
+                }
+            </div>
+        </main>
+    </div>
+</div>

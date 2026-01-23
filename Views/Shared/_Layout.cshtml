@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nhà sách NLU</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header class="header">
+  <!-- Top header -->
+    <div class="cover-top-header">
+        <div class="top-header">
+            <div class="logo">
+                <span class="logo-text">Nhà sách NLU</span>
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Bạn cần tìm gì?">
+                <button class="search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div class="header-right">
+                <div class="hotline">
+                    <i class="fa fa-headset"></i>
+                    <div class="cover-hotline">
+                        <strong>0933 109 009</strong>
+                        <span>Hot line</span>
+                    </div>
+                </div>
+
+                <div class="cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Giỏ hàng (0)</span>
+                </div>
+                <div class="login">
+                    <i class="fa fa-shopping-cart"></i>
+                    <a class="btn" href="/Home/Login">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Menu -->
+        <div class="menu-bar">
+            <div class="menu-left">
+                <i class="fa fa-bars"></i>
+                <span>
+                    Danh mục sản phẩm <i class="fa-solid fa-caret-down"></i>
+                </span>
+            </div>
+
+            <div class="menu-right">
+                <span class="promo hover-promo">🔥 Giảm thêm 2%</span>
+                <span class="hover-promo">🎁 Chương Trình Khuyến Mãi</span>
+                <button class="sale">Sale Sốc Xả Kho</button>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- footer -->
+  <footer class="cover-footer">
+        <div class="container-footer">
+            <div class="footer-intro">
+                <h3>Nhà sách NLU</h3>
+                <p><strong>Nhà sách NLU</strong> là nơi cung cấp đa dạng các đầu sách phục vụ nhu cầu học tập, làm việc và giải trí của mọi đối tượng bạn đọc. Tại đây có đầy đủ <strong>sách giáo khoa, sách tham khảo, sách kỹ năng, ngoại ngữ, truyện và văn học</strong>, phù hợp với nhiều độ tuổi và mục đích sử dụng.</p>
+                <p>Nhà sách cam kết mang đến <strong>sản phẩm chính hãng, chất lượng tốt, giá cả hợp lý</strong>, không gian thân thiện và dịch vụ tận tâm, giúp khách hàng dễ dàng lựa chọn những cuốn sách phù hợp nhất.</p>
+            </div>
+
+            <div class="newsletter-section">
+                <div class="letter-icon">
+                    <i class="fa fa-envelope"></i>
+                </div>
+                <div class="newsletter-content">
+                    <h4>Đăng ký nhận bản tin</h4>
+                    <p>Đừng bỏ lỡ những tin nhắn ưu đãi độc quyền dành riêng cho bạn</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="text" placeholder="Nhập tên của bạn">
+                    <input type="email" placeholder="Nhập địa chỉ email của bạn">
+                    <div class="gender-buttons">
+                        <button type="button" class="btn-gender">NAM</button>
+                        <button type="button" class="btn-gender">NỮ</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h5>Hỗ trợ khách hàng</h5>
+                    <ul>
+                        <li>Sản phẩm & Đơn hàng: 0342 104 524</li>
+                        <li>Kỹ thuật & Bảo hành: 0342 104 524</li>
+                        <li>Điện thoại: 0342 104 524 </li>
+                        <li>Email: nhasachnlu@gmail.com</li>
+                        <li>Địa chỉ: Khu phố 33, Phường Linh Xuân, TP.HCM</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Trợ giúp</h5>
+                    <ul>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Phương thức thanh toán</a></li>
+                        <li><a href="#">Phương thức vận chuyển</a></li>
+                        <li><a href="#">Chính sách đổi - trả</a></li>
+                        <li><a href="#">Chính sách bồi hoàn</a></li>
+                        <li><a href="#">Câu hỏi thường gặp (FAQs)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Tài khoản của bạn</h5>
+                    <ul>
+                        <li><a href="#">Cập nhật tài khoản</a></li>
+                        <li><a href="#">Giỏ hàng</a></li>
+                        <li><a href="#">Lịch sử giao dịch</a></li>
+                        <li><a href="#">Sản phẩm yêu thích</a></li>
+                        <li><a href="#">Kiểm tra đơn hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bottom-bar">
+                <div class="payment-methods">
+                    <span>Chấp nhận thanh toán:</span>
+                    <span class="payment-icons">
+                        <i class="fa-brands fa-cc-visa" style="color: #1a1f71;"></i>
+                        <i class="fa-brands fa-cc-mastercard" style="color: #eb001b;"></i>
+                        <i class="fa-regular fa-credit-card"></i> <i class="fa-solid fa-wallet"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-chat">
+            <i class="fa-regular fa-comment-dots"></i>
+        </div>
+
+        <a href="#"><div class="scroll-top">
+            <i class="fa-solid fa-arrow-up-long"></i>
+        </div>
+        </a>
+        @* <div class="floating-newsletter">
+            <div class="fn-header">
+                Đăng ký nhận bản tin từ Bookbuy <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="fn-body">
+                <input type="text" class="fn-input" placeholder="Email của bạn">
+                <div class="fn-buttons">
+                    <button class="fn-btn">NAM</button>
+                    <button class="fn-btn">NỮ</button>
+                </div>
+            </div>
+        </div> *@
+  </footer>
+</body>
+</html>
